@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.SET;
@@ -16,7 +11,6 @@ public class BoggleSolver {
     
     private class TrieSET3{       //mod. of main TrieSET with only necessary stuff
         private final int R=26;  //one branch for each possible letter
-        private int n = 0;  //trie size
         
         private class TNode{
             boolean notBlank;
@@ -53,8 +47,7 @@ public class BoggleSolver {
         private TNode add(TNode x, String key, int d) {
         if (x == null) x = new TNode();
         if (d == key.length()) {
-            if (!x.notBlank) n++;
-            x.notBlank = true;
+           x.notBlank = true;
         }
         else {
             char c = key.charAt(d);
@@ -63,6 +56,9 @@ public class BoggleSolver {
         return x;
         }
         
+        /*
+         * Thanks to vinsonlee and his repo for the c-'A' trick
+         */      
     }
     
 private TrieSET3 ts;
@@ -132,10 +128,10 @@ private TrieSET3 ts;
     }
 
     public static void main(String[] args) {
-    In in = new In(args[0]);
+    In in = new In("src//input10_1_1.txt");
     String[] dictionary = in.readAllStrings();
     BoggleSolver solver = new BoggleSolver(dictionary);
-    BoggleBoard board = new BoggleBoard(args[1]);
+    BoggleBoard board = new BoggleBoard("src//input10_1.txt");
     int score = 0;
     for (String word : solver.getAllValidWords(board)) {
         StdOut.println(word);
@@ -144,3 +140,7 @@ private TrieSET3 ts;
     StdOut.println("Score = " + score);
 }
 }
+
+       
+    
+
